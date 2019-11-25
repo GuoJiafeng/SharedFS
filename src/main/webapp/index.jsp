@@ -47,12 +47,12 @@
                 <%--                        List group item heading--%>
                 <%--                    </h4>--%>
                 <%--                </div>--%>
-
+<%--
                 <div class="list-group-item">
                     <h4 class="list-group-item-heading">
                         <a href="" >List group item heading</a>
                     </h4>
-                </div>
+                </div>--%>
 
                 <%--                <a class="list-group-item active"> <span class="badge">14</span> Help</a>--%>
             </div>

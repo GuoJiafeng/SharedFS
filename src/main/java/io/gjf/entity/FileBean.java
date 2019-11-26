@@ -10,6 +10,7 @@ import java.util.Date;
 @Document(collection = "filebean")
 public class FileBean {
 
+    private String _id;
     private String uuid;
     private String name;
     private String originalName;
@@ -29,6 +30,14 @@ public class FileBean {
         this.path = path;
         this.timestamps = timestamps;
         this.length = length;
+    }
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
     }
 
     public String getUuid() {

@@ -55,7 +55,7 @@
 
 
     <div class="row clearfix">
-        <div class="col-md-12 column">
+        <div class="col-md-6 column">
 
             <div class="list-group" id="filelist">
 
@@ -89,6 +89,7 @@
                 <%--                <a class="list-group-item active"> <span class="badge">14</span> Help</a>--%>
             </div>
         </div>
+
     </div>
 </div>
 

@@ -81,6 +81,7 @@ public class FileController {
         FileBean fileBean = new FileBean();
 
         fileBean.setUuid(fsFile.getId().toString());
+        fileBean.set_id(fsFile.getId().toString());
         fileBean.setTimestamps(String.valueOf(fsFile.getUploadDate().getTime()));
         fileBean.setName(fileName);
         fileBean.setOriginalName(originname);
@@ -110,8 +111,11 @@ public class FileController {
         FileBean fileBean = new FileBean();
 
         fileBean.setUuid(uuid);
+        fileBean.set_id(uuid);
 
         fileService.deleteOne(fileBean);
+
+        gridFsTemplate.delete(Query.query(Criteria.where("uuid").is(fileBean.getUuid())));
 
 
         return "redirect:/index.jsp";

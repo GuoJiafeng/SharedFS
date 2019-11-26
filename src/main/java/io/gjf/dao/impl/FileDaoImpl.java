@@ -4,6 +4,8 @@ import io.gjf.dao.FileDao;
 import io.gjf.entity.FileBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -28,6 +30,7 @@ public class FileDaoImpl implements FileDao {
     public void deleteOne(FileBean fileBean) {
 
         mongoTemplate.remove(fileBean);
+
 
     }
 

@@ -16,21 +16,19 @@ public class FileBean {
     private String basePath;
     private String path;
     private String timestamps;
+    private Long length;
 
-    public FileBean(String uuid, String name, String originalName, String basePath, String path, String timestamps) {
+    public FileBean() {
+    }
+
+    public FileBean(String uuid, String name, String originalName, String basePath, String path, String timestamps, Long length) {
         this.uuid = uuid;
         this.name = name;
         this.originalName = originalName;
         this.basePath = basePath;
         this.path = path;
         this.timestamps = timestamps;
-    }
-
-    public FileBean() {
-    }
-
-    public FileBean(String uuid) {
-        this.uuid = uuid;
+        this.length = length;
     }
 
     public String getUuid() {
@@ -81,6 +79,14 @@ public class FileBean {
         this.timestamps = timestamps;
     }
 
+    public Long getLength() {
+        return length;
+    }
+
+    public void setLength(Long length) {
+        this.length = length;
+    }
+
     @Override
     public String toString() {
         return "FileBean{" +
@@ -90,6 +96,7 @@ public class FileBean {
                 ", basePath='" + basePath + '\'' +
                 ", path='" + path + '\'' +
                 ", timestamps='" + timestamps + '\'' +
+                ", length=" + length +
                 '}';
     }
 }

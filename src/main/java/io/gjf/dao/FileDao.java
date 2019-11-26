@@ -9,8 +9,15 @@ import java.util.List;
  */
 public interface FileDao {
 
-    void insertOne();
+    void insertOne(FileBean fileBean);
+
+    void deleteOne(FileBean fileBean);
+
+    void deleteMany(List<FileBean> fileBeanList);
+
     List<FileBean> findAll();
+
+    void update(FileBean fileBean);
 
 
 }

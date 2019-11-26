@@ -41,9 +41,9 @@
                 <div class="list-group-item">
                     <label for="exampleInputFile">文件上传</label>
                     <form action='FileController/upload' method='post' enctype='multipart/form-data'>
-                   <input type="file" id="exampleInputFile" name="file"/>
-                    </br>
-                    <button type="submit" class="btn btn-default btn-success">上传</button>
+                        <input type="file" id="exampleInputFile" name="file"/>
+                        </br>
+                        <button type="submit" class="btn btn-default btn-success">上传</button>
                     </form>
                 </div>
 
@@ -82,7 +82,7 @@
 
 
         $.ajax({
-            url: "TestController/list",
+            url: "FileController/list",
             type: "post",
             data: {},
             dataType: "json",

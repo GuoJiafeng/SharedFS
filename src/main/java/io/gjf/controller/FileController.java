@@ -47,7 +47,6 @@ public class FileController {
 
 
     @RequestMapping("upload")
-    @ResponseBody
     public String upload(@RequestParam("file") MultipartFile file) {
         // 获取原始名字
         String fileName = file.getOriginalFilename();
@@ -66,7 +65,7 @@ public class FileController {
         try {
             // 保存到服务器中
             file.transferTo(dest);
-            return "上传成功";
+            return "index.jsp";
         } catch (Exception e) {
             e.printStackTrace();
         }

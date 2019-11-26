@@ -1,10 +1,13 @@
 package io.gjf.entity;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.Date;
 
 /**
  * Creat by GuoJF on 19-11
  */
+@Document(collection = "filebean")
 public class FileBean {
 
     private String uuid;

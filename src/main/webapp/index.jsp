@@ -34,8 +34,18 @@
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
+
             <div class="list-group" id="filelist">
+
                 <a href="#" class="list-group-item active">所有文件</a>
+                <div class="list-group-item">
+                    <label for="exampleInputFile">文件上传</label>
+                    <form action='FileController/upload' method='post' enctype='multipart/form-data'>
+                   <input type="file" id="exampleInputFile" name="file"/>
+                    </br>
+                    <button type="submit" class="btn btn-default btn-success">上传</button>
+                    </form>
+                </div>
 
                 <%--                <div class="list-group-item">--%>
                 <%--                    <h4 class="list-group-item-heading">--%>
@@ -47,12 +57,12 @@
                 <%--                        List group item heading--%>
                 <%--                    </h4>--%>
                 <%--                </div>--%>
-<%--
-                <div class="list-group-item">
-                    <h4 class="list-group-item-heading">
-                        <a href="" >List group item heading</a>
-                    </h4>
-                </div>--%>
+                <%--
+                                <div class="list-group-item">
+                                    <h4 class="list-group-item-heading">
+                                        <a href="" >List group item heading</a>
+                                    </h4>
+                                </div>--%>
 
                 <%--                <a class="list-group-item active"> <span class="badge">14</span> Help</a>--%>
             </div>

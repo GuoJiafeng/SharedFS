@@ -33,19 +33,20 @@
 
 <div class="container">
 
-
-    <div class="modal fade" id="modal-container-499906" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade " id="modal-container-499906" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4 class="modal-title" id="myModalLabel">
-                        当前文件内容为空，请选择文件！
+                        确定删除当前文件吗？
                     </h4>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">手滑了</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">确定删除</button>
                 </div>
             </div>
 
@@ -99,14 +100,14 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">文件上传进度</h4>
+                <h4 class="modal-title">正在上传</h4>
             </div>
             <div class="modal-body">
                 <div id="progress" class="progress">
                     <div id="progress_rate" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
                          class="progress-bar progress-bar-success progress-bar-striped active"
-                         role="progressbar" style="width: 0%">
-                        <span id="percent">0%</span>
+                         role="progressbar" style="width: 50%">
+                        <span id="percent">50%</span>
                     </div>
                 </div>
             </div>
@@ -136,6 +137,7 @@
 
 
     }
+
 
     function dimissprogressModal() {
 
@@ -176,9 +178,9 @@
                     html += ' <div class="list-group-item">\n' +
                         '                    <h4 class="list-group-item-heading">\n' +
                         '                         <a href="FileController/download/?uuid=' + result[i].uuid + '&&name=' + result[i].originalName + '" >' + result[i].originalName + '</a>  <a href="FileController/del/?uuid=' + result[i].uuid + '">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;删除</a>\n'
-                   +
-                    '                    </h4>\n' +
-                    '                </div>';
+                        +
+                        '                    </h4>\n' +
+                        '                </div>';
 
                 }
 

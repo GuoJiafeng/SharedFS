@@ -27,6 +27,8 @@ public class FileServiceImpl implements FileService {
     @Override
     public void deleteOne(FileBean fileBean) {
 
+        fileDao.deleteOne(fileBean);
+
     }
 
     @Override

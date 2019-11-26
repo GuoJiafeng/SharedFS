@@ -27,6 +27,8 @@ public class FileDaoImpl implements FileDao {
     @Override
     public void deleteOne(FileBean fileBean) {
 
+        mongoTemplate.remove(fileBean);
+
     }
 
     @Override

@@ -5,6 +5,8 @@ import com.mongodb.gridfs.GridFSFile;
 import io.gjf.entity.FileBean;
 import io.gjf.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.CriteriaDefinition;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.stereotype.Controller;
@@ -14,10 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -36,20 +35,19 @@ public class FileController {
     @Autowired
     private FileService fileService;
 
-    static final String BASE_PATH = "/Users/guojf/FileTest/";
+
     /*
      * 下载
      * */
 
     @RequestMapping("download")
-    public void download(HttpServletResponse response, String name) throws Exception {
+    public void download(HttpServletResponse response, String uuid, String name) throws Exception {
 
 
-        // 文件地址，真实环境是存放在数据库中的
-        File file = new File(BASE_PATH + name);
+        GridFSDBFile fsdbFile = gridFsTemplate.findOne(Query.query(Criteria.where("_id").is(uuid)));
 
         // 穿件输入对象
-        FileInputStream fis = new FileInputStream(file);
+        InputStream fis = fsdbFile.getInputStream();
         // 设置相关格式
         response.setContentType("application/force-download");
         // 设置下载后的文件名以及header
@@ -69,18 +67,15 @@ public class FileController {
     @RequestMapping("upload")
     public String upload(@RequestParam("file") MultipartFile file) throws IOException {
         // 获取原始名字
-        String fileName = file.getName();
+        String fileName = file.getOriginalFilename();
 
         String originname = fileName;
 
-        // 获取后缀名
-        // String suffixName = fileName.substring(fileName.lastIndexOf("."));
-        // 文件保存路径
-        String filePath = BASE_PATH;
         // 文件重命名，防止重复
-        fileName = filePath + UUID.randomUUID() + fileName;
+        fileName = UUID.randomUUID() + fileName;
 
-        GridFSFile fsFile = gridFsTemplate.store(file.getInputStream(), fileName);
+
+        GridFSFile fsFile = gridFsTemplate.store(file.getInputStream(), fileName, file.getContentType());
 
 
         FileBean fileBean = new FileBean();
@@ -106,6 +101,20 @@ public class FileController {
         List<FileBean> list = fileService.findAll();
 
         return list;
+    }
+
+
+    @RequestMapping("del")
+    public String del(String uuid) {
+
+        FileBean fileBean = new FileBean();
+
+        fileBean.setUuid(uuid);
+
+        fileService.deleteOne(fileBean);
+
+
+        return "redirect:/index.jsp";
     }
 
 

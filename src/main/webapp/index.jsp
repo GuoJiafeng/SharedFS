@@ -32,6 +32,28 @@
 
 
 <div class="container">
+
+
+    <div class="modal fade" id="modal-container-499906" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        当前文件内容为空，请选择文件！
+                    </h4>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
     <div class="row clearfix">
         <div class="col-md-12 column">
 
@@ -40,10 +62,10 @@
                 <a href="#" class="list-group-item active">所有文件</a>
                 <div class="list-group-item">
                     <label for="exampleInputFile">文件上传</label>
-                    <form action='FileController/upload' method='post' enctype='multipart/form-data'>
+                    <form id="uploadForm" action='FileController/upload' method='post' enctype='multipart/form-data'>
                         <input type="file" id="exampleInputFile" name="file"/>
                         </br>
-                        <button type="submit" class="btn btn-default btn-success">上传</button>
+                        <button type="button" class="btn btn-default btn-success" id="uploadButton">上传</button>
                     </form>
                 </div>
 
@@ -70,13 +92,74 @@
     </div>
 </div>
 
+<!-- 文件上传模态框 -->
+<div id="progressModal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"
+     data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">文件上传进度</h4>
+            </div>
+            <div class="modal-body">
+                <div id="progress" class="progress">
+                    <div id="progress_rate" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+                         class="progress-bar progress-bar-success progress-bar-striped active"
+                         role="progressbar" style="width: 0%">
+                        <span id="percent">0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript">
+
+    var process;// 定时对象
 
     $(function () {
 
         list();
+
+        listenUploadButton()
+
+        beginUploadProgress();
     });
 
+    function beginUploadProgress() {
+
+        var time = "${time}";
+        if (time != null && time != "") {
+            $("#msg").css("display", "block");
+        }
+
+
+    }
+
+    function dimissprogressModal() {
+
+
+        $("#progressModal").modal("show");// 打开模态框
+    }
+
+    function listenUploadButton() {
+
+        $("#uploadButton").click(function () {
+
+            if ($("#exampleInputFile").val() == "") {
+                alert("请选择文件！")
+                // window.location.reload()
+            } else {
+
+                $("#progressModal").modal("show");// 打开模态框
+
+                $("#uploadForm").submit()
+
+
+            }
+
+        });
+    }
 
     function list() {
 
@@ -91,9 +174,10 @@
                 for (var i = 0; i < result.length; i++) {
                     html += ' <div class="list-group-item">\n' +
                         '                    <h4 class="list-group-item-heading">\n' +
-                        '                         <a href="FileController/download/?name=' + result[i].name + '" >' + result[i].name + '</a>\n' +
-                        '                    </h4>\n' +
-                        '                </div>';
+                        '                         <a href="FileController/download/?uuid=' + result[i].uuid + '&&name=' + result[i].originalName + '" >' + result[i].originalName + '</a>  <a href="FileController/del/?uuid=' + result[i].uuid + '">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;删除</a>\n'
+                   +
+                    '                    </h4>\n' +
+                    '                </div>';
 
                 }
 
